@@ -145,7 +145,8 @@ class Slurm():
         stdout = result.stdout.decode('utf-8')
         #assert success_msg in stdout, result.stderr
         if success_msg not in stdout:
-            raise RuntimeError(stdout)
+            print(f"err = {result.stderr}")
+            raise RuntimeError()
         if verbose:
             print(stdout)
         job_id = int(stdout.split(' ')[3])
