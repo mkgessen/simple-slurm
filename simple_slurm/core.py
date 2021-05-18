@@ -143,7 +143,9 @@ class Slurm():
         result = subprocess.run(cmd, shell=True, stdout=subprocess.PIPE)
         success_msg = 'Submitted batch job'
         stdout = result.stdout.decode('utf-8')
-        assert success_msg in stdout, result.stderr
+        #assert success_msg in stdout, result.stderr
+        if success_msg not in stdout:
+            raise RuntimeError(stdout)
         if verbose:
             print(stdout)
         job_id = int(stdout.split(' ')[3])
